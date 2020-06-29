@@ -40,6 +40,81 @@ class DatabaseHandler(var context : Context) : SQLiteOpenHelper(context, DATABAS
         else
             Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
 
+        db.close()
+    }
+
+    fun readData() : MutableList<User>{
+        var list : MutableList<User> = ArrayList()
+
+        val db = this.readableDatabase
+        val query = "Select * from " + TABLE_NAME
+
+        val result = db.rawQuery(query, null)
+
+        if(result.moveToFirst()) {
+
+            do {
+                var user = User()
+
+                user.id = result.getString(result.getColumnIndex(COLUMN_ID)).toString().toInt()
+                user.name = result.getString(result.getColumnIndex(COLUMN_NAME)).toString()
+                user.age = result.getString(result.getColumnIndex(COLUMN_AGE)).toString().toInt()
+
+                list.add(user)
+
+            } while (result.moveToNext())
+        }
+
+        result.close()
+        db.close()
+        return list
+    }
+
+    fun deleteAllData() {
+        val db = this.writableDatabase
+
+        db.delete(TABLE_NAME,null,null)
+        db.close()
+    }
+
+    fun getId(name: String) : Int {
+        val db = this.readableDatabase
+        val query = "Select * from " + TABLE_NAME
+
+        val result = db.rawQuery(query, null)
+
+        if(result.moveToFirst()) {
+
+            do {
+                var user = User()
+
+                user.id = result.getString(result.getColumnIndex(COLUMN_ID)).toString().toInt()
+                user.name = result.getString(result.getColumnIndex(COLUMN_NAME)).toString()
+                user.age = result.getString(result.getColumnIndex(COLUMN_AGE)).toString().toInt()
+
+                if(user.name == name){
+                    return user.id
+                }
+
+            } while (result.moveToNext())
+        }
+
+        result.close()
+        db.close()
+        return -1
+    }
+
+    fun updateAge (id : Int, age : Int) {
+        val db = this.writableDatabase
+
+        val query = "Select * from " + TABLE_NAME
+
+        val result = db.rawQuery(query, null)
+
+        var cv = ContentValues()
+        cv.put(COLUMN_AGE, age)
+        db.update(TABLE_NAME, cv,COLUMN_ID + "=?", arrayOf(id.toString()))
+        db.close()
     }
 
 }
