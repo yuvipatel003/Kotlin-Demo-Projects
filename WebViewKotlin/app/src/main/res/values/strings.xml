@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">WebView-Kotlin</string>
+    <string name="str_forward"><![CDATA[>]]></string>
+    <string name="str_back"><![CDATA[<]]></string>
+</resources>

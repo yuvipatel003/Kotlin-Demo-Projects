@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+
+       <Button
+           android:id="@+id/btnBack"
+           android:layout_width="50dp"
+           android:layout_height="50dp"
+           android:text="@string/str_back"/>
+
+        <Button
+           android:id="@+id/btnForward"
+           android:layout_width="50dp"
+           android:layout_height="50dp"
+           android:text="@string/str_forward"
+           android:layout_toEndOf="@+id/btnBack"/>
+
+       <EditText
+           android:id="@+id/editTextUrl"
+           android:layout_width="match_parent"
+           android:layout_height="50dp"
+           android:maxLines="1"
+           android:layout_toEndOf="@+id/btnForward"
+           android:layout_toStartOf="@id/btnGo"/>
+
+       <Button
+           android:id="@+id/btnGo"
+           android:layout_width="50dp"
+           android:layout_height="50dp"
+           android:text="Go"
+           android:layout_alignParentEnd="true"/>
+   </RelativeLayout>
+
+    <WebView
+        android:id="@+id/webViewMain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>
